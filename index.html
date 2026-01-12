@@ -19,7 +19,7 @@
   canvas {
     display: block;
     background: #000;
-    cursor: none;
+    cursor: pointer;
   }
   
   @keyframes pulse {
@@ -33,6 +33,18 @@
 
   <canvas id="game"></canvas>
 
+  <!-- Load modules in dependency order -->
+  <script src="js/utils.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/gameState.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/update.js"></script>
+  <script src="js/render.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
