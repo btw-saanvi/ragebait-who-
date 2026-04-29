@@ -10,3 +10,4 @@ let reversed = false;
 let camX = 0;
 let menuOpen = false;
 let highestLevel = 0;
+let gameStarted = false;

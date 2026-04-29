@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Level Devil</title>
   <style>
+  <style>
   * {
     margin: 0;
     padding: 0;
@@ -12,24 +13,205 @@
 
   body {
     overflow: hidden;
-    background: #000;
+    background: #0c0c0c;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   canvas {
     display: block;
-    background: #000;
+    background: #0c0c0c;
     cursor: pointer;
   }
   
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+  #starter-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0c0c0c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    color: #fff;
+    text-align: center;
+    transition: opacity 0.5s;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #888;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: monospace;
+  }
+  
+  .neon-title {
+    font-size: 80px;
+    font-family: "Courier New", Courier, monospace;
+    color: #ff3333;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+    margin-bottom: 30px;
+    font-weight: bold;
+    letter-spacing: 5px;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  .description .highlight {
+    color: #4488ff;
+  }
+  
+  .controls-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+  }
+  
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .control-keys {
+    color: #ff3333;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .control-action {
+    color: #888;
+  }
+  
+  .start-btn {
+    background: #ff3333;
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff0000, inset 0 0 10px rgba(255,255,255,0.2);
+    margin-bottom: 30px;
+    font-family: "Courier New", Courier, monospace;
+    transition: transform 0.1s, box-shadow 0.1s;
+    outline: none;
+  }
+  
+  .start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #ff0000, inset 0 0 10px rgba(255,255,255,0.4);
+  }
+  
+  .press-any-key {
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 3px;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  #game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    z-index: 50;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  .level-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .deaths-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 3px;
+    text-align: right;
+  }
+  
+  .deaths-counter span {
+    display: block;
+    font-size: 28px;
+    color: #ff3333;
+    font-weight: bold;
+    letter-spacing: 0;
+    margin-top: 5px;
+  }
+  
+  .bottom-controls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    letter-spacing: 5px;
   }
 </style>
 
 </head>
 <body>
+
+  <div id="starter-menu">
+    <div class="subtitle">A MASOCORE PLATFORMER</div>
+    <div class="neon-title">LEVEL DEVIL</div>
+    <div class="description">
+      Every jump matters. Every mistake costs you.<br>
+      Reach the yellow door. <span class="highlight">Die. Learn. Repeat.</span>
+    </div>
+    <div class="controls-info">
+      <div class="control-group">
+        <div class="control-keys">A / &larr;</div>
+        <div class="control-action">Move Left</div>
+      </div>
+      <div class="control-group">
+        <div class="control-keys">D / &rarr;</div>
+        <div class="control-action">Move Right</div>
+      </div>
+      <div class="control-group">
+        <div class="control-keys">W / Space</div>
+        <div class="control-action">Jump</div>
+      </div>
+    </div>
+    <button class="start-btn" id="start-btn">BEGIN SUFFERING</button>
+    <div class="press-any-key">OR PRESS ANY KEY</div>
+  </div>
+
+  <div id="game-ui">
+    <div id="level-title-display" class="level-title">Level <span id="ui-level">1</span> &mdash; Welcome</div>
+    <div class="deaths-counter">DEATHS<span id="ui-deaths">0</span></div>
+    <div class="bottom-controls">A / &larr; MOVE &nbsp;&nbsp;&nbsp;&nbsp; D / &rarr; MOVE &nbsp;&nbsp;&nbsp;&nbsp; W / &uarr; / SPACE JUMP</div>
+  </div>
+
+  <div id="death-dialogue" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ff3333; text-align: center; font-family: 'Courier New', Courier, monospace; z-index: 200; pointer-events: none;">
+    <h2 id="death-message" style="font-size: 64px; font-weight: bold; letter-spacing: 5px; text-shadow: 0 0 20px #ff0000;"></h2>
+  </div>
 
   <canvas id="game"></canvas>
 

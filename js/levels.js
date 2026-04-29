@@ -63,5 +63,5 @@ function die() {
   message = pick(taunts);
   sounds.death();
   createExplosion(player.x + player.w / 2, player.y + player.h / 2);
-  setTimeout(() => resetLevel(), 400);
+  showDeathDialogue(message);
 }

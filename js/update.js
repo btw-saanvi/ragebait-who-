@@ -6,8 +6,8 @@ function update() {
   const lvl = levels[level];
   if (player.invuln > 0) player.invuln--;
   
-  // Skip update if menu is open
-  if (menuOpen) {
+  // Skip update if menu or dialogue is open
+  if (menuOpen || (typeof dialogueOpen !== 'undefined' && dialogueOpen)) {
     if (shake > 0) shake--;
     updateParticles();
     return;

@@ -12,118 +12,76 @@ const lies = [
 ];
 
 const taunts = [
-  "Try again",
-  "So close",
-  "Almost",
-  "Again?",
-  "Keep going"
+  "Skill issue.",
+  "My grandma plays better.",
+  "Are you even trying?",
+  "Delete the game.",
+  "Pathetic.",
+  "Is your monitor off?",
+  "Just give up.",
+  "Trash."
 ];
 
 // Level Data (15 levels total)
 const levels = [
   {
+    name: "Welcome",
     platforms: [
-      { x: 320, yOffset: 140, w: 50, h: 12, betray: true, breakTime: 180 },
-      { x: 450, yOffset: 180, w: 45, h: 12, betray: false, invisible: true },
-      { x: 580, yOffset: 150, w: 50, h: 12, betray: true, breakTime: 200 },
-      { x: 720, yOffset: 190, w: 40, h: 12, betray: false, invisible: true }
+      { x: -50, yOffset: 40, w: 350, h: 200, betray: false },
+      { x: 450, yOffset: 60, w: 90, h: 15, betray: false },
+      { x: 700, yOffset: 120, w: 90, h: 15, betray: true, breakTime: 200 },
+      { x: 950, yOffset: 180, w: 90, h: 15, betray: false },
+      { x: 1200, yOffset: 120, w: 90, h: 15, betray: true, breakTime: 200 },
+      { x: 1400, yOffset: 40, w: 400, h: 200, betray: false }
     ],
-    spikes: [{ x: 400 }, { x: 650 }],
+    spikes: Array.from({length: 44}).map((_, i) => ({ x: 300 + i * 25 })), // 300 to 1375
     movers: [],
     saws: [],
-    ceilings: [{ x: 300, w: 200, h: 20, yOffset: 80 }],
-    fakeDoor: { x: 850, move: 280 },
-    exit: { x: 1100, yOffset: 80 },
-    reverseChance: 0.3
+    ceilings: [],
+    exit: { x: 1500, yOffset: 120 },
+    reverseChance: 0
   },
   {
+    name: "Faith",
     platforms: [
-      { x: 300, yOffset: 150, w: 45, h: 12, betray: true, breakTime: 160 },
-      { x: 430, yOffset: 200, w: 40, h: 12, betray: true, invisible: true },
-      { x: 560, yOffset: 160, w: 50, h: 12, betray: true, breakTime: 180 },
-      { x: 700, yOffset: 190, w: 35, h: 12, betray: false, invisible: true }
+      { x: -50, yOffset: 40, w: 350, h: 200, betray: false },
+      { x: 450, yOffset: 70, w: 90, h: 15, betray: false },
+      { x: 650, yOffset: 130, w: 90, h: 15, betray: false },
+      { x: 850, yOffset: 190, w: 90, h: 15, betray: false },
+      { x: 1050, yOffset: 130, w: 90, h: 15, betray: false },
+      { x: 1200, yOffset: 110, w: 90, h: 15, betray: false, invisible: true }, // Leap of faith catcher
+      { x: 1350, yOffset: 70, w: 90, h: 15, betray: true, breakTime: 100 },
+      { x: 1550, yOffset: 40, w: 400, h: 200, betray: false }
     ],
-    spikes: [{ x: 380 }, { x: 510 }, { x: 640 }],
-    movers: [
-      { x: 480, yOffset: 100, w: 50, h: 12, start: 480, end: 680, speed: 2.8 }
-    ],
+    spikes: Array.from({length: 50}).map((_, i) => ({ x: 300 + i * 25 })), // 300 to 1525
+    movers: [],
     saws: [],
-    ceilings: [{ x: 280, w: 180, h: 20, yOffset: 70 }, { x: 550, w: 200, h: 20, yOffset: 60 }],
-    fakeDoor: { x: 900, move: 320 },
-    exit: { x: 1200, yOffset: 80 },
-    reverseChance: 0.4
+    ceilings: [],
+    exit: { x: 1650, yOffset: 120 },
+    reverseChance: 0
   },
   {
+    name: "Motion",
     platforms: [
-      { x: 280, yOffset: 140, w: 40, h: 12, betray: true, breakTime: 150 },
-      { x: 410, yOffset: 200, w: 35, h: 12, betray: false, invisible: true },
-      { x: 540, yOffset: 150, w: 45, h: 12, betray: true, breakTime: 170 },
-      { x: 680, yOffset: 180, w: 40, h: 12, betray: true, invisible: true },
-      { x: 800, yOffset: 160, w: 50, h: 12, betray: true, breakTime: 160 }
+      { x: -50, yOffset: 40, w: 350, h: 200, betray: false },
+      { x: 700, yOffset: 190, w: 90, h: 15, betray: false },
+      { x: 700, yOffset: 70, w: 90, h: 15, betray: false },
+      { x: 1250, yOffset: 130, w: 90, h: 15, betray: false },
+      { x: 1600, yOffset: 40, w: 400, h: 200, betray: false }
     ],
-    spikes: [{ x: 360 }, { x: 490 }, { x: 620 }, { x: 750 }],
+    spikes: Array.from({length: 52}).map((_, i) => ({ x: 300 + i * 25 })), // 300 to 1575
     movers: [
-      { x: 440, yOffset: 80, w: 45, h: 12, start: 440, end: 640, speed: 3.2 },
-      { x: 640, yOffset: 120, w: 40, h: 12, start: 640, end: 840, speed: -2.5 }
+      { x: 400, yOffset: 70, w: 90, h: 15, start: 350, end: 500, speed: 2.5 },
+      { x: 950, yOffset: 70, w: 90, h: 15, start: 900, end: 1050, speed: 2.5 },
+      { x: 1500, yOffset: 70, w: 90, h: 15, start: 1450, end: 1600, speed: -2.5 } // Reaches end platform
     ],
     saws: [
-      { x: 500, yOffset: 60, r: 20, speed: 0.1 }
+      { x: 850, yOffset: 25, r: 25, speed: 0.15 },
+      { x: 1400, yOffset: 25, r: 25, speed: -0.15 }
     ],
-    ceilings: [{ x: 270, w: 150, h: 20, yOffset: 50 }, { x: 530, w: 180, h: 20, yOffset: 40 }, { x: 790, w: 160, h: 20, yOffset: 45 }],
-    fakeDoor: { x: 1000, move: 360 },
-    exit: { x: 1300, yOffset: 80 },
-    reverseChance: 0.5
-  },
-  {
-    platforms: [
-      { x: 260, yOffset: 150, w: 35, h: 10, betray: true, breakTime: 140 },
-      { x: 390, yOffset: 180, w: 30, h: 10, betray: false, invisible: true },
-      { x: 520, yOffset: 130, w: 40, h: 10, betray: true, breakTime: 150 },
-      { x: 660, yOffset: 200, w: 35, h: 10, betray: true, invisible: true },
-      { x: 780, yOffset: 140, w: 45, h: 10, betray: true, breakTime: 145 },
-      { x: 920, yOffset: 190, w: 30, h: 10, betray: false, invisible: true }
-    ],
-    spikes: [{ x: 340 }, { x: 470 }, { x: 600 }, { x: 730 }, { x: 860 }],
-    movers: [
-      { x: 420, yOffset: 100, w: 40, h: 10, start: 420, end: 620, speed: 3.5 },
-      { x: 620, yOffset: 60, w: 35, h: 10, start: 620, end: 820, speed: -3 },
-      { x: 820, yOffset: 90, w: 40, h: 10, start: 820, end: 1020, speed: 2.8 }
-    ],
-    saws: [
-      { x: 460, yOffset: 50, r: 24, speed: 0.14 },
-      { x: 760, yOffset: 70, r: 22, speed: -0.12 }
-    ],
-    ceilings: [{ x: 250, w: 120, h: 20, yOffset: 30 }, { x: 510, w: 140, h: 20, yOffset: 25 }, { x: 770, w: 130, h: 20, yOffset: 35 }, { x: 910, w: 150, h: 20, yOffset: 28 }],
-    fakeDoor: { x: 1100, move: 400 },
-    exit: { x: 1400, yOffset: 80 },
-    reverseChance: 0.6
-  },
-  {
-    platforms: [
-      { x: 240, yOffset: 140, w: 30, h: 10, betray: true, breakTime: 130 },
-      { x: 370, yOffset: 200, w: 25, h: 10, betray: false, invisible: true },
-      { x: 500, yOffset: 150, w: 35, h: 10, betray: true, breakTime: 140 },
-      { x: 640, yOffset: 180, w: 30, h: 10, betray: true, invisible: true },
-      { x: 760, yOffset: 130, w: 40, h: 10, betray: true, breakTime: 135 },
-      { x: 900, yOffset: 190, w: 25, h: 10, betray: false, invisible: true },
-      { x: 1020, yOffset: 160, w: 35, h: 10, betray: true, breakTime: 130 }
-    ],
-    spikes: [{ x: 320 }, { x: 450 }, { x: 580 }, { x: 710 }, { x: 840 }, { x: 970 }],
-    movers: [
-      { x: 400, yOffset: 100, w: 35, h: 10, start: 400, end: 600, speed: 4 },
-      { x: 600, yOffset: 60, w: 30, h: 10, start: 600, end: 800, speed: -3.5 },
-      { x: 800, yOffset: 90, w: 35, h: 10, start: 800, end: 1000, speed: 3.2 },
-      { x: 1000, yOffset: 110, w: 30, h: 10, start: 1000, end: 1200, speed: -2.8 }
-    ],
-    saws: [
-      { x: 440, yOffset: 50, r: 26, speed: 0.16 },
-      { x: 740, yOffset: 70, r: 24, speed: -0.14 },
-      { x: 1040, yOffset: 55, r: 25, speed: 0.15 }
-    ],
-    ceilings: [{ x: 230, w: 100, h: 20, yOffset: 20 }, { x: 490, w: 120, h: 20, yOffset: 15 }, { x: 750, w: 110, h: 20, yOffset: 25 }, { x: 890, w: 130, h: 20, yOffset: 18 }, { x: 1010, w: 140, h: 20, yOffset: 22 }],
-    fakeDoor: { x: 1200, move: 450 },
-    exit: { x: 1500, yOffset: 80 },
-    reverseChance: 0.7
+    ceilings: [],
+    exit: { x: 1700, yOffset: 120 },
+    reverseChance: 0
   },
   // Level 6 - First sky door
   {
